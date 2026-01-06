@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Consent & Privacy Test</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Consent & Privacy Test Platform</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="pia.html">PIA</a>
+    <span id="authLinks"></span>
+  </nav>
+</header>
+
+<main>
+  <section>
+    <h2>Purpose</h2>
+    <p>
+      This website is used to test consent governance,
+      cookie management, and privacy assessment tools.
+    </p>
+  </section>
+
+  <section>
+    <h2>Cookie Testing</h2>
+
+    <button onclick="setTestCookie()">Set Cookie</button>
+    <button onclick="readTestCookie()">Read Cookie</button>
+    <button onclick="deleteTestCookie()">Delete Cookie</button>
+
+    <p id="cookieStatus"></p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Consent Test Environment</p>
+</footer>
+<!-- Cookie Consent Popup -->
+<div id="cookieConsent" class="cookie-popup">
+  <h3>We value your privacy</h3>
+
+  <p>
+    This website uses cookies to enhance user experience and
+    comply with India’s Digital Personal Data Protection (DPDP) Act.
+  </p>
+
+  <div class="cookie-options">
+    <label>
+      <input type="checkbox" checked disabled>
+      Necessary Cookies (Required)
+    </label>
+
+    <label>
+      <input type="checkbox" id="analyticsCookies">
+      Analytics Cookies
+    </label>
+
+    <label>
+      <input type="checkbox" id="marketingCookies">
+      Marketing Cookies
+    </label>
+  </div>
+
+  <div class="cookie-buttons">
+    <button onclick="acceptAllCookies()">Accept All</button>
+    <button onclick="rejectNonEssential()">Reject Non-Essential</button>
+    <button onclick="savePreferences()">Save Preferences</button>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+<script src="js/index.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

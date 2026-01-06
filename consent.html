@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Consent Required</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Consent</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <span id="authLinks"></span>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Consent Form (PoC)</h2>
+      <p>This site requires user consent before registration. The template used for this PoC is hosted externally.</p>
+
+      <p>
+        <button id="viewTemplate">View Original Template (opens in new tab)</button>
+      </p>
+
+      <div class="consent-content">
+        <!-- Replace this block with the exact text of your predefined template for PoC -->
+        <h3>Data Processing and Cookies</h3>
+        <p>We use necessary cookies. Analytics and marketing cookies are optional — select your preferences below.</p>
+
+        <h4>Preferences</h4>
+        <label><input type="checkbox" id="analyticsCookies"> Analytics Cookies</label><br>
+        <label><input type="checkbox" id="marketingCookies"> Marketing Cookies</label>
+
+        <h4>Privy Consent</h4>
+        <p>To complete registration you must view and accept the external Privy consent template. The template opens in a new tab; after accepting there, confirm below.</p>
+        <label>
+          <input type="checkbox" id="privyAcceptedCheckbox"> I confirm I have viewed and accepted the external Privy consent
+        </label>
+      </div>
+
+      <div class="consent-actions">
+        <button id="acceptConsent" disabled>Accept and Continue</button>
+        <button id="declineConsent">Decline</button>
+      </div>
+
+      <div id="declineWarning" style="display:none; margin-top:12px; color:#900;">
+        Consent is mandatory to use this system. You cannot register without providing consent.
+      </div>
+    </section>
+  </main>
+
+  <script src="js/auth.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/consent.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    // redirect to consent page if userConsent not present
+    try {
+      const consent = localStorage.getItem('userConsent');
+      if (!consent) {
+        window.location.href = 'consent.html';
+      }
+    } catch (e) {
+      // if localStorage is not available, still allow navigation to consent page
+      window.location.href = 'consent.html';
+    }
+  </script>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Register</h2>
+    <form id="registerForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="text" id="phone">
+
+      <h3>Consent</h3>
+      <label>
+        <input type="checkbox" checked disabled> Necessary Cookies (Required)
+      </label>
+      <label>
+        <input type="checkbox" id="analyticsCookies"> Analytics Cookies
+      </label>
+      <label>
+        <input type="checkbox" id="marketingCookies"> Marketing Cookies
+      </label>
+
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>

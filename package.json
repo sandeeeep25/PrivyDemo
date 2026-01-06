@@ -1,0 +1,11 @@
+{
+  "name": "privy-test-poc",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build-config": "node scripts/generate-config.js"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0"
+  }
+}
