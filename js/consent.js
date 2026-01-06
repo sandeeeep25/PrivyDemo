@@ -1,5 +1,5 @@
 // Consent PoC logic
-const EXTERNAL_TEMPLATE_URL = (window.__APP_CONFIG && window.__APP_CONFIG.PRIVY_TEMPLATE_URL) ? window.__APP_CONFIG.PRIVY_TEMPLATE_URL : '';
+const EXTERNAL_TEMPLATE_URL = "https://privy.idfy.com/principal/notice/04c6d7e7-b4b5-42cd-9310-c9d8dfd5dae9/view/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhX2ZpZHVjaWFyeV9pZCI6IjhkMDljYzVlZWFjMyIsImRhdGFfcHJpbmNpcGFsX2lkIjoiZTExYzZkOGEtMWY1Mi00M2QxLTlmOGEtNWY1ZDg1OWVkMWQ5IiwiZXhwIjoxNzY4NDc2NDMzLCJvdV9pZCI6IjhkMDljYzVlZWFjMyIsInB1YmxpY19pZCI6IjA0YzZkN2U3LWI0YjUtNDJjZC05MzEwLWM5ZDhkZmQ1ZGFlOSIsInJlZmVyZW5jZV9pZCI6IjEzMTMiLCJhdWQiOiJKb2tlbiIsImV4cCI6MTc2NzYxOTAzMywiaWF0IjoxNzY3NjExODMzLCJpc3MiOiJKb2tlbiIsImp0aSI6IjMyM3QzNjd0N2E5MTRlZW5iYzAyNm90MSIsIm5iZiI6MTc2NzYxMTgzM30.fQQLxgXVLa5xHV7ocaqnt3IXwarc4KrHfWfQEf_r2Yo";
 
 function openTemplate() {
   // external resource sets X-Frame-Options, so open in new tab/window
