@@ -5,10 +5,42 @@ export default async function handler(req, res) {
 
 	const incoming = req.url || '/';
 	const proxiedPath = incoming.replace(/^\/api\/azure-proxy/, '') || '/';
-	const sep = proxiedPath.includes('?') ? '&' : '?';
-	const target = FUNCTION_KEY
-		? `${API_BASE}${proxiedPath}${sep}code=${FUNCTION_KEY}`
-		: `${API_BASE}${proxiedPath}`;
+
+	// Normalize API_BASE and proxied path to avoid duplicated segments (e.g. /api/api/...)
+	const API_BASE_CLEAN = API_BASE.replace(/\/+$/, ''); // remove trailing slash(es)
+	let proxiedPathClean = proxiedPath || '/';
+	if (!proxiedPathClean.startsWith('/')) proxiedPathClean = '/' + proxiedPathClean;
+
+	let target;
+	if (API_BASE_CLEAN.endsWith('/api') && proxiedPathClean.startsWith('/api')) {
+		// avoid double '/api' when API_BASE already includes it
+		target = API_BASE_CLEAN + proxiedPathClean.replace(/^\/api/, '');
+	} else {
+		target = API_BASE_CLEAN + proxiedPathClean;
+	}
+
+	// append function key if present
+	if (FUNCTION_KEY) {
+		const sep = target.includes('?') ? '&' : '?';
+		target = `${target}${sep}code=${FUNCTION_KEY}`;
+	}
+
+	// Log target for debugging in Vercel function logs (without query)
+	const targetNoQuery = target.split('?')[0];
+	console.log('azure-proxy target:', targetNoQuery);
+
+	// Safe debug mode: if caller adds ?debug=1 to the proxied request, return the computed
+	// upstream URL WITHOUT query string so we don't leak function keys. Example:
+	// /api/azure-proxy/api/LoginUser?debug=1
+	try {
+		const reqUrl = new URL(req.url || '/', 'http://localhost');
+		if (reqUrl.searchParams.get('debug') === '1') {
+			res.status(200).json({ target: targetNoQuery });
+			return;
+		}
+	} catch (e) {
+		// ignore parse errors and continue
+	}
 
 	async function readRawBody(r) {
 		return new Promise((resolve, reject) => {
