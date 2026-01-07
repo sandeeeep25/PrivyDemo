@@ -14,8 +14,14 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
             marketing: document.getElementById("marketingCookies").checked ? 1 : 0
         };
 
-        // Use server-side proxy on Vercel to keep secrets private
-        const url = '/api/azure-proxy/api/test';
+        const base = window.__APP_CONFIG && window.__APP_CONFIG.API_BASE;
+        const key = window.__APP_CONFIG && window.__APP_CONFIG.FUNCTION_KEY;
+        if (!base || !key) {
+            alert('Configuration missing: API_BASE and FUNCTION_KEY must be set in js/config.js');
+            return;
+        }
+
+        const url = `${base}/api/test?code=${key}`;
 
         const response = await fetch(url, {
             method: "POST",

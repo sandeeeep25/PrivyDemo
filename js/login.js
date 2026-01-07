@@ -6,8 +6,14 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         password: document.getElementById("password").value
     };
 
-    // Use server-side proxy on Vercel to keep secrets private
-    const url = '/api/azure-proxy/api/LoginUser';
+    const base = window.__APP_CONFIG && window.__APP_CONFIG.API_BASE;
+    const key = window.__APP_CONFIG && window.__APP_CONFIG.FUNCTION_KEY;
+    if (!base || !key) {
+        alert('Configuration missing: API_BASE and FUNCTION_KEY must be set in js/config.js');
+        return;
+    }
+
+    const url = `${base}/api/LoginUser?code=${key}`;
 
     const response = await fetch(url, {
         method: "POST",
