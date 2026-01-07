@@ -15,12 +15,20 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         body: JSON.stringify(data)
     });
 
-    const result = await response.json();
+    const contentType = response.headers.get('content-type') || '';
+    let result;
+    if (contentType.includes('application/json')) {
+        try { result = await response.json(); } catch (_) { result = null; }
+    } else {
+        try { result = await response.text(); } catch (_) { result = null; }
+    }
+
     if (response.ok) {
         alert("Login successful!");
-        localStorage.setItem("userId", result.userId);
-        window.location.href = "index.html"; // redirect after login
+        if (result && result.userId) localStorage.setItem("userId", result.userId);
+        window.location.href = "index.html";
     } else {
-        alert("Error: " + result);
+        const message = (result && result.message) ? result.message : (typeof result === 'string' ? result : JSON.stringify(result));
+        alert("Error: " + message);
     }
 });

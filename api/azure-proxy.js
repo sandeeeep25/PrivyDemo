@@ -34,6 +34,13 @@ export default async function handler(req, res) {
 		const buf = await upstream.arrayBuffer();
 		const contentType = upstream.headers.get('content-type') || '';
 
+		// If upstream returned a non-OK status, convert to JSON message so frontend can handle it safely
+		if (!upstream.ok) {
+			const text = buf && buf.byteLength ? Buffer.from(buf).toString('utf8') : '';
+			res.status(upstream.status).json({ error: 'Upstream error', status: upstream.status, body: text });
+			return;
+		}
+
 		res.status(upstream.status);
 		if (contentType.includes('application/json')) res.setHeader('Content-Type', 'application/json');
 		else if (contentType) res.setHeader('Content-Type', contentType);
