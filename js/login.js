@@ -20,7 +20,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
     });
-
+    console.log('Login response status:', response);
     const contentType = response.headers.get('content-type') || '';
     let result;
     if (contentType.includes('application/json')) {
