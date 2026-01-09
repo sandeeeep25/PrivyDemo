@@ -32,7 +32,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     if (response.ok) {
         alert("Login successful!");
         if (result && result.userId) localStorage.setItem("userId", result.userId);
-        window.location.href = "pia.html";
+        window.location.href = "home.html";
     } else {
         const message = (result && result.message) ? result.message : (typeof result === 'string' ? result : JSON.stringify(result));
         alert("Error: " + message);
