@@ -32,6 +32,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     if (response.ok) {
         alert("Login successful!");
         console.log('Login result:', result);
+        console.log('Storing userId in localStorage:', result.userId);
         if (result && result.userId) localStorage.setItem("userId", result.userId);
         window.location.href = "home.html";
     } else {
