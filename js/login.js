@@ -40,3 +40,79 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         alert("Error: " + message);
     }
 });
+
+
+// ============================
+// NEW: REGISTER → CONSENT FLOW
+// ============================
+
+document.getElementById("registerBtn")?.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const base = window.__APP_CONFIG.API_BASE;
+    const key = window.__APP_CONFIG.FUNCTION_KEY;
+
+    // 1️⃣ Generate UUID (Data Principal ID)
+    const dataPrincipalId = crypto.randomUUID();
+    const referenceId = "web-reg-" + Date.now();
+
+    // Store for later (after consent)
+    localStorage.setItem("pendingConsentUserId", dataPrincipalId);
+
+    // 2️⃣ Call Azure Function
+    const response = await fetch(`${base}/api/generateConsent?code=${key}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            referenceId,
+            dataPrincipalId
+        })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+        alert("Failed to generate consent");
+        return;
+    }
+
+    // 3️⃣ Open consent popup
+    openConsentPopup(result.embedLink);
+});
+
+
+// ============================
+// CONSENT POPUP FUNCTION
+// ============================
+
+function openConsentPopup(embedLink) {
+    const modal = document.createElement("div");
+    modal.id = "consentModal";
+
+    modal.style.position = "fixed";
+    modal.style.top = "0";
+    modal.style.left = "0";
+    modal.style.width = "100%";
+    modal.style.height = "100%";
+    modal.style.background = "rgba(0,0,0,0.6)";
+    modal.style.zIndex = "9999";
+
+    modal.innerHTML = `
+        <div style="
+            width: 80%;
+            height: 80%;
+            margin: 5% auto;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        ">
+            <iframe
+                src="${embedLink}"
+                style="width:100%;height:100%;border:none;">
+            </iframe>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+}
