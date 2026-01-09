@@ -4,10 +4,6 @@
          "route": "/index.html",
          "allowedRoles": ["anonymous"]
        },
-      {
-         "route": "/home.html",
-         "allowedRoles": ["anonymous"]
-       },
        {
          "route": "/*",
          "allowedRoles": ["anonymous"]
