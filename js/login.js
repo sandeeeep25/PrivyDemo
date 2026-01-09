@@ -31,6 +31,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     if (response.ok) {
         alert("Login successful!");
+        console.log('Login result:', result);
         if (result && result.userId) localStorage.setItem("userId", result.userId);
         window.location.href = "home.html";
     } else {
