@@ -30,7 +30,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     }
 
     if (response.ok) {
-        alert("Login successful!");
+        alert("Login successful!" , result && result.userId, response);
         console.log('Login result:', result);
         console.log('Storing userId in localStorage:', result.userId);
         if (result && result.userId) localStorage.setItem("userId", result.userId);
