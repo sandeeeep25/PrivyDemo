@@ -12,8 +12,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         alert('Configuration missing: API_BASE and FUNCTION_KEY must be set in js/config.js');
         return;
     }
-
-    const url = `${base}/api/LoginUser?code=${key}`;
+    const url = `${base}/api/newLogin?code=${key}`;
 
     const response = await fetch(url, {
         method: "POST",
