@@ -4,18 +4,6 @@
   <meta charset="UTF-8">
   <title>Register</title>
   <link rel="stylesheet" href="css/style.css">
-  <script>
-    // redirect to consent page if userConsent not present
-    try {
-      const consent = localStorage.getItem('userConsent');
-      if (!consent) {
-        window.location.href = 'consent.html';
-      }
-    } catch (e) {
-      // if localStorage is not available, still allow navigation to consent page
-      window.location.href = 'consent.html';
-    }
-  </script>
 </head>
 <body>
 
@@ -37,7 +25,7 @@
       <label for="phone">Phone Number:</label>
       <input type="text" id="phone">
 
-      <h3>Consent</h3>
+      <!-- <h3>Consent</h3>
       <label>
         <input type="checkbox" checked disabled> Necessary Cookies (Required)
       </label>
@@ -46,7 +34,7 @@
       </label>
       <label>
         <input type="checkbox" id="marketingCookies"> Marketing Cookies
-      </label>
+      </label> -->
 
       <button type="submit">Register</button>
     </form>

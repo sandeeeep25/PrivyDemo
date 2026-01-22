@@ -2,7 +2,9 @@
 function logout() {
   try {
     localStorage.removeItem("userId");
-    localStorage.removeItem("cookieConsent");
+    localStorage.removeItem("privyConsent");
+    // localStorage.removeItem("privyConsentedBannerId");
+    // localStorage.removeItem("privyDataPrincipalId");
   } catch (e) {
     console.warn("Could not clear localStorage during logout", e);
   }
