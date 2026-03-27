@@ -7,6 +7,6 @@
     "build-config": "node scripts/generate-config.js"
   },
   "devDependencies": {
-    "dotenv": "^16.0.0"
+    "dotenv": "^16.6.1"
   }
 }

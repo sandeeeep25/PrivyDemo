@@ -5,6 +5,7 @@ function logout() {
     localStorage.removeItem("privyConsent");
     // localStorage.removeItem("privyConsentedBannerId");
     // localStorage.removeItem("privyDataPrincipalId");
+    localStorage.removeItem("privy_Data_Principal_Id");
   } catch (e) {
     console.warn("Could not clear localStorage during logout", e);
   }

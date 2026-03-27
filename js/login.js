@@ -3,6 +3,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     const base = window.__APP_CONFIG && window.__APP_CONFIG.API_BASE;
     const key = window.__APP_CONFIG && window.__APP_CONFIG.FUNCTION_KEY;
+    console.log("API_BASE:", base);
 
     if (!base || !key) {
         alert("Configuration missing");
@@ -33,6 +34,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         if (response.ok) {
             // ✅ Login allowed only if AccountStatus = ACTIVE (backend enforced)
             localStorage.setItem("userId", result.userId);
+            localStorage.setItem("privy_Data_Principal_Id", result.dataPrincipalId.toLowerCase()); // 🔥 store dataPrincipalId for DPAR
             window.location.href = "home.html";
         } else {
             // ❌ Consent not granted OR invalid credentials
