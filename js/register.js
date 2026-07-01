@@ -101,43 +101,60 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     }
 
     // 3️⃣ Open Privy popup
-    openConsentPopup(consentResult.embedLink);
+    console(consentResult.Link);
+    openConsentPopup(consentResult.Link);
 });
 
 // ============================
 // CONSENT POPUP FUNCTION
 // ============================
 
+// function openConsentPopup(embedLink) {
+//     console.log(embedLink);
+//     const modal = document.createElement("div");
+//     modal.id = "consentModal";
+
+//     modal.style.position = "fixed";
+//     modal.style.top = "0";
+//     modal.style.left = "0";
+//     modal.style.width = "100%";
+//     modal.style.height = "100%";
+//     modal.style.background = "rgba(0,0,0,0.6)";
+//     modal.style.zIndex = "9999";
+
+//     modal.innerHTML = `
+//         <div style="
+//             width: 80%;
+//             height: 80%;
+//             margin: 5% auto;
+//             background: #fff;
+//             border-radius: 8px;
+//             overflow: hidden;
+//             position: relative;
+//         ">
+//             <iframe
+//                 src="${embedLink}"
+//                 style="width:100%;height:100%;border:none;">
+//             </iframe>
+//         </div>
+//     `;
+
+//     document.body.appendChild(modal);
+// }
+
 function openConsentPopup(embedLink) {
-    const modal = document.createElement("div");
-    modal.id = "consentModal";
 
-    modal.style.position = "fixed";
-    modal.style.top = "0";
-    modal.style.left = "0";
-    modal.style.width = "100%";
-    modal.style.height = "100%";
-    modal.style.background = "rgba(0,0,0,0.6)";
-    modal.style.zIndex = "9999";
+    console.log("Opening consent:", embedLink);
 
-    modal.innerHTML = `
-        <div style="
-            width: 80%;
-            height: 80%;
-            margin: 5% auto;
-            background: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            position: relative;
-        ">
-            <iframe
-                src="${embedLink}"
-                style="width:100%;height:100%;border:none;">
-            </iframe>
-        </div>
-    `;
+    const popup = window.open(
+        embedLink,
+        "PrivyConsent",
+        "width=900,height=750,resizable=yes,scrollbars=yes"
+    );
 
-    document.body.appendChild(modal);
+    if (!popup) {
+        alert("Popup blocked. Please allow popups for this site.");
+    }
 }
 
 // ============================
