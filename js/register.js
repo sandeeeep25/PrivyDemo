@@ -101,8 +101,8 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     }
 
     // 3️⃣ Open Privy popup
-    console(consentResult.Link);
-    openConsentPopup(consentResult.Link);
+    console.log(consentResult.link);
+    openConsentPopup(consentResult.link);
 });
 
 // ============================
